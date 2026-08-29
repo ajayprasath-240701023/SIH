@@ -1,0 +1,345 @@
+{
+  "description": "Demo dataset: A simulated crypto fraud scenario. Suspect wallet 0xSUSPECT001 receives victim funds, then layers them through intermediary wallets before depositing into exchange wallets.",
+  "suspect_wallets": ["0xaaa1110000000000000000000000000000000001"],
+  "wallets": {
+    "0xaaa1110000000000000000000000000000000001": {
+      "label": "Suspect Wallet",
+      "transactions": [
+        {
+          "hash": "0xdemo_tx_001",
+          "from": "0xvictim0000000000000000000000000000000001",
+          "to": "0xaaa1110000000000000000000000000000000001",
+          "value_wei": "5000000000000000000",
+          "value_eth": 5.0,
+          "timeStamp": "1700000000",
+          "blockNumber": "18500000",
+          "gas": "21000",
+          "gasPrice": "20000000000",
+          "isError": "0",
+          "direction": "in"
+        },
+        {
+          "hash": "0xdemo_tx_002",
+          "from": "0xvictim0000000000000000000000000000000002",
+          "to": "0xaaa1110000000000000000000000000000000001",
+          "value_wei": "3200000000000000000",
+          "value_eth": 3.2,
+          "timeStamp": "1700000300",
+          "blockNumber": "18500025",
+          "gas": "21000",
+          "gasPrice": "20000000000",
+          "isError": "0",
+          "direction": "in"
+        },
+        {
+          "hash": "0xdemo_tx_003",
+          "from": "0xaaa1110000000000000000000000000000000001",
+          "to": "0xbbb2220000000000000000000000000000000001",
+          "value_wei": "2500000000000000000",
+          "value_eth": 2.5,
+          "timeStamp": "1700000600",
+          "blockNumber": "18500050",
+          "gas": "21000",
+          "gasPrice": "20000000000",
+          "isError": "0",
+          "direction": "out"
+        },
+        {
+          "hash": "0xdemo_tx_004",
+          "from": "0xaaa1110000000000000000000000000000000001",
+          "to": "0xbbb2220000000000000000000000000000000002",
+          "value_wei": "3000000000000000000",
+          "value_eth": 3.0,
+          "timeStamp": "1700000660",
+          "blockNumber": "18500055",
+          "gas": "21000",
+          "gasPrice": "20000000000",
+          "isError": "0",
+          "direction": "out"
+        },
+        {
+          "hash": "0xdemo_tx_005",
+          "from": "0xaaa1110000000000000000000000000000000001",
+          "to": "0xbbb2220000000000000000000000000000000003",
+          "value_wei": "1500000000000000000",
+          "value_eth": 1.5,
+          "timeStamp": "1700000720",
+          "blockNumber": "18500060",
+          "gas": "21000",
+          "gasPrice": "20000000000",
+          "isError": "0",
+          "direction": "out"
+        },
+        {
+          "hash": "0xdemo_tx_006",
+          "from": "0xaaa1110000000000000000000000000000000001",
+          "to": "0xbbb2220000000000000000000000000000000004",
+          "value_wei": "1000000000000000000",
+          "value_eth": 1.0,
+          "timeStamp": "1700000780",
+          "blockNumber": "18500065",
+          "gas": "21000",
+          "gasPrice": "20000000000",
+          "isError": "0",
+          "direction": "out"
+        }
+      ]
+    },
+    "0xbbb2220000000000000000000000000000000001": {
+      "label": "Intermediary 1",
+      "transactions": [
+        {
+          "hash": "0xdemo_tx_003",
+          "from": "0xaaa1110000000000000000000000000000000001",
+          "to": "0xbbb2220000000000000000000000000000000001",
+          "value_wei": "2500000000000000000",
+          "value_eth": 2.5,
+          "timeStamp": "1700000600",
+          "blockNumber": "18500050",
+          "gas": "21000",
+          "gasPrice": "20000000000",
+          "isError": "0",
+          "direction": "in"
+        },
+        {
+          "hash": "0xdemo_tx_007",
+          "from": "0xbbb2220000000000000000000000000000000001",
+          "to": "0xccc3330000000000000000000000000000000001",
+          "value_wei": "1200000000000000000",
+          "value_eth": 1.2,
+          "timeStamp": "1700000900",
+          "blockNumber": "18500075",
+          "gas": "21000",
+          "gasPrice": "20000000000",
+          "isError": "0",
+          "direction": "out"
+        },
+        {
+          "hash": "0xdemo_tx_008",
+          "from": "0xbbb2220000000000000000000000000000000001",
+          "to": "0xccc3330000000000000000000000000000000002",
+          "value_wei": "1100000000000000000",
+          "value_eth": 1.1,
+          "timeStamp": "1700000960",
+          "blockNumber": "18500080",
+          "gas": "21000",
+          "gasPrice": "20000000000",
+          "isError": "0",
+          "direction": "out"
+        }
+      ]
+    },
+    "0xbbb2220000000000000000000000000000000002": {
+      "label": "Intermediary 2",
+      "transactions": [
+        {
+          "hash": "0xdemo_tx_004",
+          "from": "0xaaa1110000000000000000000000000000000001",
+          "to": "0xbbb2220000000000000000000000000000000002",
+          "value_wei": "3000000000000000000",
+          "value_eth": 3.0,
+          "timeStamp": "1700000660",
+          "blockNumber": "18500055",
+          "gas": "21000",
+          "gasPrice": "20000000000",
+          "isError": "0",
+          "direction": "in"
+        },
+        {
+          "hash": "0xdemo_tx_009",
+          "from": "0xbbb2220000000000000000000000000000000002",
+          "to": "0xccc3330000000000000000000000000000000001",
+          "value_wei": "1500000000000000000",
+          "value_eth": 1.5,
+          "timeStamp": "1700001200",
+          "blockNumber": "18500100",
+          "gas": "21000",
+          "gasPrice": "20000000000",
+          "isError": "0",
+          "direction": "out"
+        },
+        {
+          "hash": "0xdemo_tx_010",
+          "from": "0xbbb2220000000000000000000000000000000002",
+          "to": "0x28c6c06298d514db089934071355e5743bf21d60",
+          "value_wei": "1000000000000000000",
+          "value_eth": 1.0,
+          "timeStamp": "1700001260",
+          "blockNumber": "18500105",
+          "gas": "21000",
+          "gasPrice": "20000000000",
+          "isError": "0",
+          "direction": "out"
+        }
+      ]
+    },
+    "0xbbb2220000000000000000000000000000000003": {
+      "label": "Intermediary 3",
+      "transactions": [
+        {
+          "hash": "0xdemo_tx_005",
+          "from": "0xaaa1110000000000000000000000000000000001",
+          "to": "0xbbb2220000000000000000000000000000000003",
+          "value_wei": "1500000000000000000",
+          "value_eth": 1.5,
+          "timeStamp": "1700000720",
+          "blockNumber": "18500060",
+          "gas": "21000",
+          "gasPrice": "20000000000",
+          "isError": "0",
+          "direction": "out"
+        },
+        {
+          "hash": "0xdemo_tx_011",
+          "from": "0xbbb2220000000000000000000000000000000003",
+          "to": "0x2910543af39aba0cd09dbb2d50200b3e800a63d2",
+          "value_wei": "1400000000000000000",
+          "value_eth": 1.4,
+          "timeStamp": "1700001500",
+          "blockNumber": "18500125",
+          "gas": "21000",
+          "gasPrice": "20000000000",
+          "isError": "0",
+          "direction": "out"
+        }
+      ]
+    },
+    "0xbbb2220000000000000000000000000000000004": {
+      "label": "Intermediary 4",
+      "transactions": [
+        {
+          "hash": "0xdemo_tx_006",
+          "from": "0xaaa1110000000000000000000000000000000001",
+          "to": "0xbbb2220000000000000000000000000000000004",
+          "value_wei": "1000000000000000000",
+          "value_eth": 1.0,
+          "timeStamp": "1700000780",
+          "blockNumber": "18500065",
+          "gas": "21000",
+          "gasPrice": "20000000000",
+          "isError": "0",
+          "direction": "out"
+        },
+        {
+          "hash": "0xdemo_tx_012",
+          "from": "0xbbb2220000000000000000000000000000000004",
+          "to": "0xccc3330000000000000000000000000000000003",
+          "value_wei": "900000000000000000",
+          "value_eth": 0.9,
+          "timeStamp": "1700001800",
+          "blockNumber": "18500150",
+          "gas": "21000",
+          "gasPrice": "20000000000",
+          "isError": "0",
+          "direction": "out"
+        }
+      ]
+    },
+    "0xccc3330000000000000000000000000000000001": {
+      "label": "Layering Wallet A",
+      "transactions": [
+        {
+          "hash": "0xdemo_tx_007",
+          "from": "0xbbb2220000000000000000000000000000000001",
+          "to": "0xccc3330000000000000000000000000000000001",
+          "value_wei": "1200000000000000000",
+          "value_eth": 1.2,
+          "timeStamp": "1700000900",
+          "blockNumber": "18500075",
+          "gas": "21000",
+          "gasPrice": "20000000000",
+          "isError": "0",
+          "direction": "in"
+        },
+        {
+          "hash": "0xdemo_tx_009",
+          "from": "0xbbb2220000000000000000000000000000000002",
+          "to": "0xccc3330000000000000000000000000000000001",
+          "value_wei": "1500000000000000000",
+          "value_eth": 1.5,
+          "timeStamp": "1700001200",
+          "blockNumber": "18500100",
+          "gas": "21000",
+          "gasPrice": "20000000000",
+          "isError": "0",
+          "direction": "in"
+        },
+        {
+          "hash": "0xdemo_tx_013",
+          "from": "0xccc3330000000000000000000000000000000001",
+          "to": "0x28c6c06298d514db089934071355e5743bf21d60",
+          "value_wei": "2500000000000000000",
+          "value_eth": 2.5,
+          "timeStamp": "1700002100",
+          "blockNumber": "18500175",
+          "gas": "21000",
+          "gasPrice": "20000000000",
+          "isError": "0",
+          "direction": "out"
+        }
+      ]
+    },
+    "0xccc3330000000000000000000000000000000002": {
+      "label": "Layering Wallet B",
+      "transactions": [
+        {
+          "hash": "0xdemo_tx_008",
+          "from": "0xbbb2220000000000000000000000000000000001",
+          "to": "0xccc3330000000000000000000000000000000002",
+          "value_wei": "1100000000000000000",
+          "value_eth": 1.1,
+          "timeStamp": "1700000960",
+          "blockNumber": "18500080",
+          "gas": "21000",
+          "gasPrice": "20000000000",
+          "isError": "0",
+          "direction": "in"
+        },
+        {
+          "hash": "0xdemo_tx_014",
+          "from": "0xccc3330000000000000000000000000000000002",
+          "to": "0xa9d1e08c7793af67e9d92fe308d5697fb81d3e43",
+          "value_wei": "1000000000000000000",
+          "value_eth": 1.0,
+          "timeStamp": "1700002400",
+          "blockNumber": "18500200",
+          "gas": "21000",
+          "gasPrice": "20000000000",
+          "isError": "0",
+          "direction": "out"
+        }
+      ]
+    },
+    "0xccc3330000000000000000000000000000000003": {
+      "label": "Layering Wallet C",
+      "transactions": [
+        {
+          "hash": "0xdemo_tx_012",
+          "from": "0xbbb2220000000000000000000000000000000004",
+          "to": "0xccc3330000000000000000000000000000000003",
+          "value_wei": "900000000000000000",
+          "value_eth": 0.9,
+          "timeStamp": "1700001800",
+          "blockNumber": "18500150",
+          "gas": "21000",
+          "gasPrice": "20000000000",
+          "isError": "0",
+          "direction": "in"
+        },
+        {
+          "hash": "0xdemo_tx_015",
+          "from": "0xccc3330000000000000000000000000000000003",
+          "to": "0x28c6c06298d514db089934071355e5743bf21d60",
+          "value_wei": "800000000000000000",
+          "value_eth": 0.8,
+          "timeStamp": "1700002700",
+          "blockNumber": "18500225",
+          "gas": "21000",
+          "gasPrice": "20000000000",
+          "isError": "0",
+          "direction": "out"
+        }
+      ]
+    }
+  }
+}

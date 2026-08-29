@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Crypto Fraud Attribution System — Real-time blockchain fund-flow tracing, risk scoring, and exchange identification for investigators.">
+    <title>Crypto Fraud Attribution System — Investigator Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vis-network@9.1.9/standalone/umd/vis-network.min.js"></script>
+</head>
+<body>
+
+    <!-- ═══ Top Header ═══ -->
+    <header class="top-header">
+        <div class="brand">
+            <div class="brand-icon">🔗</div>
+            <div class="brand-text">
+                <h1>Crypto Fraud Attribution</h1>
+                <span>Investigator Dashboard</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="mode-badge demo" id="modeBadge">
+                <span class="dot"></span>
+                <span id="modeText">DEMO</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ═══ Main Layout ═══ -->
+    <div class="app-layout">
+
+        <!-- ── Sidebar ── -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3>🎯 Demo Wallets</h3>
+                <div id="demoWallets">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+            <div class="sidebar-section">
+                <h3>📁 Saved Cases</h3>
+                <div id="savedCases">
+                    <p style="color: var(--text-muted); font-size: 11px; padding: 8px 0;">No saved cases yet.</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ── Main Content ── -->
+        <main class="main-content">
+
+            <!-- Input Panel -->
+            <section class="input-panel" id="inputPanel">
+                <h2>🔍 Trace Fund Flow</h2>
+                <div class="input-row">
+                    <div class="input-group">
+                        <input
+                            type="text"
+                            id="walletInput"
+                            placeholder="Enter suspect wallet address (e.g., 0xaaa111...)"
+                            spellcheck="false"
+                            autocomplete="off"
+                        >
+                    </div>
+                    <div class="depth-select">
+                        <select id="depthSelect">
+                            <option value="1">1 Hop</option>
+                            <option value="2">2 Hops</option>
+                            <option value="3" selected>3 Hops</option>
+                            <option value="4">4 Hops</option>
+                            <option value="5">5 Hops</option>
+                        </select>
+                    </div>
+                    <button class="trace-btn" id="traceBtn" onclick="runTrace()">
+                        <span class="btn-text">⚡ Trace</span>
+                        <span class="spinner"></span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Welcome / Empty State -->
+            <div class="empty-state" id="emptyState">
+                <div class="empty-icon">🕵️</div>
+                <h2>Ready to Investigate</h2>
+                <p>Enter a suspect wallet address above or click one of the demo wallets in the sidebar to start tracing the flow of funds across the blockchain.</p>
+            </div>
+
+            <!-- Results (hidden until trace runs) -->
+            <div id="resultsSection" class="hidden">
+
+                <!-- Stats Row -->
+                <div class="stats-row" id="statsRow">
+                    <div class="stat-card">
+                        <div class="stat-value" id="statWallets">0</div>
+                        <div class="stat-label">Wallets Traced</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="statTransactions">0</div>
+                        <div class="stat-label">Connections</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="statValue">0</div>
+                        <div class="stat-label">ETH Moved</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="statExchanges">0</div>
+                        <div class="stat-label">Exchanges Found</div>
+                    </div>
+                </div>
+
+                <!-- Actions Bar -->
+                <div class="actions-bar">
+                    <button class="action-btn primary" onclick="downloadReport()">📄 Download Report</button>
+                    <button class="action-btn" onclick="saveCase()">💾 Save Case</button>
+                    <button class="action-btn" onclick="resetView()">🔄 New Trace</button>
+                </div>
+
+                <!-- Results Grid -->
+                <div class="results-grid">
+
+                    <!-- Fund Flow Graph -->
+                    <div class="card graph-card">
+                        <div class="card-header">
+                            <h3>🌐 Fund Flow Graph</h3>
+                            <span style="font-size:10px; color:var(--text-muted);">Click & drag to explore • Scroll to zoom</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="graph-container" id="graphContainer"></div>
+                        </div>
+                    </div>
+
+                    <!-- Risk Score -->
+                    <div class="card risk-card">
+                        <div class="card-header">
+                            <h3>⚠️ Risk Assessment</h3>
+                        </div>
+                        <div class="risk-gauge">
+                            <div class="gauge-ring">
+                                <svg viewBox="0 0 160 160" width="160" height="160">
+                                    <circle class="gauge-bg" cx="80" cy="80" r="65"></circle>
+                                    <circle class="gauge-fill" id="gaugeFill" cx="80" cy="80" r="65"></circle>
+                                </svg>
+                                <div class="gauge-value">
+                                    <div class="score-number" id="riskScore">0</div>
+                                    <div class="score-label">/ 100</div>
+                                </div>
+                            </div>
+                            <span class="risk-level-badge" id="riskBadge">—</span>
+                        </div>
+                        <ul class="risk-reasons" id="riskReasons"></ul>
+                    </div>
+
+                    <!-- Exchange Matches -->
+                    <div class="card exchange-card">
+                        <div class="card-header">
+                            <h3>🏦 Exchange Matches</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul class="exchange-list" id="exchangeList">
+                                <li style="color:var(--text-muted); font-size:12px;">No exchange matches.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Transaction Timeline -->
+                    <div class="card tx-card">
+                        <div class="card-header">
+                            <h3>📋 Transaction Timeline</h3>
+                            <span style="font-size:10px; color:var(--text-muted);" id="txCount">0 transactions</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="tx-table-wrap">
+                                <table class="tx-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Tx Hash</th>
+                                            <th>From</th>
+                                            <th>To</th>
+                                            <th>Value (ETH)</th>
+                                            <th>Time</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="txTableBody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- ═══ Loading Overlay ═══ -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Tracing fund flow across the blockchain…</div>
+    </div>
+
+    <!-- ═══ Toast Container ═══ -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
